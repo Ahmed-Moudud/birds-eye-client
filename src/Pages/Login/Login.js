@@ -35,15 +35,7 @@ const Login = () => {
         .catch(err =>console.error(err));
     }
 
-    const handleResetPassword =(data)=>{
-        console.log(data.email);
-        resetPassword()
-        .then(result => {
-            const user = result.user;
-            
-        })
-        .catch(err => console.error(err))
-    }
+  
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -78,14 +70,12 @@ const Login = () => {
 
                       className="input input-bordered w-full max-w-xs" />
                       
-                    <label className="label">
-                       <button onClick={handleResetPassword}> <span className="label-text">Forget Password?</span></button>
-                    </label>
+                   
                     {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
 
 
                 </div>
-                <input className='btn btn-accent w-full' value="Login" type="submit" />
+                <input className='btn btn-accent w-full my-4' value="Login" type="submit" />
                 <div>
                     {
                        loginError && <p className='text-red-600'>{loginError} </p>  
