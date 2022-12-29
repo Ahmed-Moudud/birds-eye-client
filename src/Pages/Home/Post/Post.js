@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Post = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const {user} = useContext(AuthContext);
     const imageHostKey = process.env.REACT_APP_imgbb_key;
+    const navigate = useNavigate();
 
     const handlePost = data => {
         const image = data.image[0];
@@ -20,7 +23,24 @@ const Post = () => {
 
             .then(res => res.json())
             .then(imgData => {
-               console.log(imgData);
+               if(imgData.success){
+                const post = {
+                    postDetail: data.postDetail,
+                    image: imgData.data.url
+                }
+                fetch('http://localhost:5000/posts', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(post)
+                })
+                    .then(res => res.json())
+                    .then(result => {
+                        toast.success('Post uploaded successfully!');
+                        navigate('/media')
+                    })
+               }
             })
     }
 
@@ -29,9 +49,10 @@ const Post = () => {
             <form onSubmit={handleSubmit(handlePost)}>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
-                        <span className="label-text">Write anything to Express your Feeling!!</span>
+                        <span className="label-text">Write Here to Express Your Feeling!!</span>
                     </label>
-                    <input type='text'
+                    <textarea type='text'
+                    style={{width: "100%", height:"250px"}}
                         {...register("postDetail", {
                             required: "Product Name is required"
                         })}
