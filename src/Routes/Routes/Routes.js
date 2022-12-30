@@ -6,6 +6,7 @@ import Login from "../../Pages/Login/Login";
 import Media from "../../Pages/Media/Media";
 import PostDetail from "../../Pages/PostDetail/PostDetail";
 import SignUp from "../../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -31,9 +32,12 @@ const router = createBrowserRouter([
                 element: <Media></Media>
             },
             {
-                path: '/postdetail',
-                element: <PostDetail></PostDetail>
+                path: '/posts/:id',
+                element: <PrivateRoute><PostDetail></PostDetail></PrivateRoute> ,
+                loader: ({params})=> fetch(`http://localhost:5000/posts/${params.id}`)
             }
+            
+          
            
         ]
     }
