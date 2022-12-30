@@ -8,7 +8,7 @@ const Home = () => {
     const {data: selectedpost = []} = useQuery({
         queryKey: ['selectedpost'],
         queryFn: async() => {
-            const res = await fetch ('http://localhost:5000/selectedpost');
+            const res = await fetch ('https://birdseye-server.vercel.app/selectedpost');
             const data = await res.json();
             return data;
         }

@@ -7,7 +7,7 @@ const Media = () => {
     const {data: postInfo =[]} = useQuery({
         queryKey: ['postInfo'],
         queryFn: async() => {
-            const res = await fetch('http://localhost:5000/posts');
+            const res = await fetch('https://birdseye-server.vercel.app/posts');
             const data = await res.json();
             return data;
         }

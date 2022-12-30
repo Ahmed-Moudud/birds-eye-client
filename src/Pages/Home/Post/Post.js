@@ -28,7 +28,7 @@ const Post = () => {
                     postDetail: data.postDetail,
                     image: imgData.data.url
                 }
-                fetch('http://localhost:5000/posts', {
+                fetch('https://birdseye-server.vercel.app/posts', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

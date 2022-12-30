@@ -16,7 +16,7 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/media">Media</Link></li>
         <li><Link to="/">Message</Link></li>
-        <li><Link to="/">About</Link></li>
+        <li><Link to="/about">About</Link></li>
 
         {user?.uid ?
 
