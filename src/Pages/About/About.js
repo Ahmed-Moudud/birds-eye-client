@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
+import Loading from '../Shared/Loading/Loading';
 
 const About = () => {
     const { user, loading } = useContext(AuthContext);
@@ -7,7 +8,7 @@ const About = () => {
    
 
     if(loading){
-        return <button className="btn btn-square loading"></button>
+        return <Loading></Loading>
     } 
 
     const { email } = user;

@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: {errors}} = useForm();
-    const {signIn, googleSignIn, resetPassword} = useContext(AuthContext);
+    const {signIn, googleSignIn} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             navigate('/');
-            // console.log(user);   
+               
             reset();         
         })
         .catch(error => {

@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthProvider';
 import PostCard from '../PostCard/PostCard';
+import Loading from '../Shared/Loading/Loading';
 
 const Media = () => {
+    const {loading} = useContext(AuthContext);
 
     const {data: postInfo =[]} = useQuery({
         queryKey: ['postInfo'],
@@ -12,6 +15,10 @@ const Media = () => {
             return data;
         }
     })
+
+    if(loading){
+        return <Loading></Loading>
+    }
     return (
         <div>
             <h2 className='text-center text-2xl my-2'>All Posts</h2>

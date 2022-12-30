@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { AuthContext } from '../../contexts/AuthProvider';
+import Loading from '../Shared/Loading/Loading';
 
 
 
 const PostDetail = () => {
+    const {loading} = useContext(AuthContext)
     const post = useLoaderData();
     // console.log(post);
     const { image, postDetail } = post;
 
     const [countLove, setCountLove] = useState(0);
     const [countLike, setCountLike] = useState(0);
+
+    if(loading){
+        return <Loading></Loading>
+    } 
 
 
     return (

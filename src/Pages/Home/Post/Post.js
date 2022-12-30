@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loading from '../../Shared/Loading/Loading';
 
 const Post = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const {user} = useContext(AuthContext);
+    const {user, loading} = useContext(AuthContext);
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     const navigate = useNavigate();
 
@@ -42,6 +43,10 @@ const Post = () => {
                     })
                }
             })
+    }
+
+    if(loading){
+        return <Loading></Loading>
     }
 
     return (

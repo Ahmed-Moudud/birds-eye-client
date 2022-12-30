@@ -1,10 +1,13 @@
 import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider';
 import PostCard from '../../PostCard/PostCard';
+import Loading from '../../Shared/Loading/Loading';
 import Post from '../Post/Post';
 
 const Home = () => {
+    const {loading} = useContext(AuthContext);
     const {data: selectedpost = []} = useQuery({
         queryKey: ['selectedpost'],
         queryFn: async() => {
@@ -13,6 +16,10 @@ const Home = () => {
             return data;
         }
     });
+
+    if(loading){
+        return <Loading></Loading>
+    }
 
 
     return (
